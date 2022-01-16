@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter un argonaute {% endblock %}
+
+{% block body %}
+<section>
+{{ form_start(formEquipage)}}
+    {{ form_row(formEquipage.membre)}}
+    {{ form_row(formEquipage.qualificatif)}}
+
+<button type="submit"> Valider </button>
+{{ form_end(formEquipage)}}
+</section>
+
+{% endblock %}
