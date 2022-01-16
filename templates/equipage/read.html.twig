@@ -1,24 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Ajouter un argonaute {% endblock %}
+{% block title %} Liste des membres équipage {% endblock %}
 
 {% block body %}
-<h1> Equipage </h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th> Numero </th>
-                <td>{{ equipage.id }}</td>
-            </tr>
-            <tr>
-                <th> Nom </th>
-                <td>{{ equipage.membre }}</td>
-            </tr>
-            <tr>
-                <th>Adjectifs qualificatifs </th>
-                <td>{{ equipage.qualificatif }}</td>
-            </tr>
-        </tbody>
-    </table>
+<h2>Membres de l'équipage</h2>
+  <section class="member-list" >
+    <div class="member-item">Eleftheria</div>
+    <div class="member-item">Gennadios</div>
+    <div class="member-item">Lysimachos</div>
+  </section>
+</main>
 {% endblock %}

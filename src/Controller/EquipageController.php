@@ -30,7 +30,7 @@ class EquipageController extends AbstractController
             $em->persist($equipage);
             $em->flush();
         }
-        return $this->render('equipage/index.html.twig', [
+        return $this->render('equipage/create.html.twig', [
             'formEquipage' => $form->createView(),
         ]);
     }
