@@ -15,11 +15,19 @@
     <label form="name">Nom de l&apos;Argonaute</label>
 </div>
 <div>
-    <input id="name" name="name" type="text" placeholder="Charalampos" />
+    {{ form(formEquipage)}}
     <button type="submit">Envoyer</button>
     </div>
   </form>
+  <center><div>
+  {% for equipage in equipages %}
+  
+ <li> {{ equipage.membre }} </li>
+
+  {% endfor %}
+  </div></center>
 
 </section>
+
 
 {% endblock %}

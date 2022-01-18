@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 use App\Entity\Equipage;
 use App\Repository\EquipageRepository;
@@ -18,33 +19,25 @@ use App\Form\EquipageType;
 class EquipageController extends AbstractController
 {
     /**
-     * @Route("/equipage/new", name="equipage")
+     * @Route("/equipage", name="creer_equipage")
      */
     public function create(Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $equipage = new Equipage();
-        $form = $this->createForm(EquipageType::class, $equipage);
+        $formEquipage = new Equipage();
+        $form = $this->createForm(EquipageType::class, $formEquipage);
+        // Je récupère la liste des equipages
+        $equipages = $this->getDoctrine()->getRepository(Equipage::class)->findAll();
         
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em->persist($equipage);
+            $em->persist($formEquipage);
             $em->flush();
         }
-        return $this->render('equipage/create.html.twig', [
+        return $this->render('equipage/index.html.twig', [
             'formEquipage' => $form->createView(),
+            // J'affiche la liste quoi qu'il arrive
+            'equipages' =>$equipages
         ]);
     }
-
-    /**
-     * @Route("/equipage/read", name="read_equipage", methods="GET")
-     */
-    public function read(EquipageRepository $equipageRepository): Response
-    {
-        $membres = $equipageRepository->findAll();
-        $json = json_encode($membres);
-        $reponse = new Response($json, 200, [
-        'content-type' => 'application/json'
-        ]);
-        return $reponse;
-    }
+          
 }
